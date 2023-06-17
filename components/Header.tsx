@@ -62,13 +62,14 @@ const Header: NextPage = () => {
                                 <h1 className="text-sm">Join or Sign In</h1>
                             </Dropdown.Header>
                             <Dropdown.Item >
-                                   <Link href={{pathname:'/authentication'}} prefetch={true} className="flex"><AiOutlineLogin className=" mr-3 text-xl"/><span>Sign In</span></Link>
+                                   <Link href={{pathname:'/authentication',query:'signin=true'}} prefetch={true} className="flex"><AiOutlineLogin className=" mr-3 text-xl"/><span>Sign In</span></Link>
                                 
                             </Dropdown.Item>
                             <Dropdown.Item>
                                  
-                                <AiOutlineUserAdd className=" mr-3 text-xl "/>
+                            <Link href={{pathname:'/authentication',query:'signup=true'}} prefetch={true} className="flex"><AiOutlineUserAdd className=" mr-3 text-xl "/>
                                  <span>Join Us</span>
+                                 </Link>
                             </Dropdown.Item>
                             <Dropdown.Item>
                                 Help

@@ -32,28 +32,7 @@ const BottomNavBar: NextPage = () => {
                         <li><Button  color={'gray'}  className="rounded-none border-none" onClick={handler}><BsBag className="text-[20pt]"/></Button></li>
                         <li><Button  color={'gray'}  className="rounded-none border-none" onClick={handler}><BsHeart className="text-[20pt]"/></Button></li>
                         <li><Button  color={'gray'}  className="rounded-none border-none" onClick={handler}><BsBell className="text-[20pt]"/></Button></li>
-                        <Dropdown
-                            label={<AiOutlineUser className="text-xl"/>}
-                            color={'gray'}
-                            className="rounded-none border-none"
-                            
-                        >
-                            <Dropdown.Header>
-                                <h1 className="text-sm">Join or Sign In</h1>
-                            </Dropdown.Header>
-                            <Dropdown.Item >
-                                   <AiOutlineLogin className=" mr-3 text-xl"/><span>Sign In</span>
-                                
-                            </Dropdown.Item>
-                            <Dropdown.Item>
-                                 
-                                <AiOutlineUserAdd className=" mr-3 text-xl "/>
-                                 <span>Join Us</span>
-                            </Dropdown.Item>
-                            <Dropdown.Item>
-                                Help
-                            </Dropdown.Item>
-                        </Dropdown>
+                        
                     </ul>
                     
                 </div>
