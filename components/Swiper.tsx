@@ -13,7 +13,7 @@ import "swiper/css/navigation";
 // import required modules
 import { Pagination,Navigation,Keyboard,Autoplay} from "swiper";
 import Image from "next/image";
-import { getClothes } from "@/services/api";
+import { getClothes,products } from "@/services/api";
 
 
 /*
@@ -46,15 +46,12 @@ export default function SwiperComponent() {
 
  (async ()=>{
   await handler();
+  //await products(5);
  })();
   return (
     <>
       <Swiper
-        autoplay={{
-          delay:2000,
-          disableOnInteraction:true,
-          reverseDirection:true,
-        }}
+        
         pagination={{
           dynamicBullets: true,
         }}
@@ -66,8 +63,17 @@ export default function SwiperComponent() {
         className="mySwiper"
       >
        {links.map((src:string,index:number)=>(
-        <SwiperSlide style={{height:400}} >
-            <img className="w-full h-[500px]" src={src}/>
+        <SwiperSlide key={index} style={{height:400}} >
+               <Image
+                src={src}
+                alt="cover"
+                loading="lazy"
+                //loader={Spinner }
+                width={1000}
+                height={500}
+                quality={100}
+
+             />
         </SwiperSlide>
        ))}
         

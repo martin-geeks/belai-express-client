@@ -56,7 +56,7 @@ export default function ProductContainer() {
         virtual
       >
         {slides.map((slideContent, index) => (
-          <SwiperSlide key={slideContent} virtualIndex={index}>
+          <SwiperSlide className='h-[400px]' style={{}}  key={slideContent} virtualIndex={index}>
             {slideContent}
           </SwiperSlide>
         ))}

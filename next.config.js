@@ -6,7 +6,12 @@ const nextConfig = {
             {
               protocol: 'https',
               hostname: 'www.thetimes.co.uk',
-            }]
+            },
+            {
+              protocol: 'https',
+              hostname: 'unsplash.com',
+            }
+          ]
     }
 }
 
