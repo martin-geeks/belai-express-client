@@ -2,13 +2,25 @@
 import React, { useRef, useState } from 'react';
 import SwiperCore, { Virtual, Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
+import img from '../public/canvas.jpg';
+import iphone from '../public/apple-iphone-14-pro-max.jpg';
+import dress from '../public/karen-willis-holmes.jpg';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import ProductCard from './ProductCard';
+import { Product } from '@/utils/types';
 
 
+const products: Product[] = [
+  {name:'Canvas',amount:300,category:'Clothing,Magazine,Shopping',id:'',rating:4,img:img.src},
+  {name:'Apple iPhone 14 Pro Max',amount:2500,category:'Technology',id:'',rating:5,img:iphone.src},
+  {name:'Karen Williams Holmes',amount:390,category:'Foods,Canes',id:'',rating:1.9,img:dress.src},
+  {name:'Karen Williams Holmes',amount:390,category:'Foods,Canes',id:'',rating:1.9,img:dress.src},
+  {name:'Karen Williams Holmes',amount:390,category:'Foods,Canes',id:'',rating:1.9,img:dress.src},
+  {name:'Karen Williams Holmes',amount:390,category:'Foods,Canes',id:'',rating:1.9,img:dress.src}
+]
 // install Virtual module
 SwiperCore.use([Virtual, Navigation, Pagination]);
 
@@ -17,24 +29,8 @@ export default function ProductContainer() {
   const appendNumber = useRef(500);
   const prependNumber = useRef(1);
   // Create array with 500 slides
-  const [slides, setSlides] = useState(
-    Array.from({ length: 500 }).map((_, index) => `Slide ${index + 1}`)
-  );
 
-  const prepend = () => {
-    setSlides([
-      `Slide ${prependNumber.current - 2}`,
-      `Slide ${prependNumber.current - 1}`,
-      ...slides,
-    ]);
-    prependNumber.current = prependNumber.current - 2;
-    //@ts-ignore
-    swiperRef.slideTo(swiperRef.activeIndex + 2, 0);
-  };
-
-  const append = () => {
-    setSlides([...slides, 'Slide ' + ++appendNumber.current]);
-  };
+  
 
   const slideTo = (index:number) => {
     //@ts-ignore
@@ -42,11 +38,14 @@ export default function ProductContainer() {
   };
 
   return (
-    <>
+    <div className='my-[5%] border py-5'>
+      <h1 className='text-2xl font-bold my-5 mx-2'>
+        Top stocks and Brands
+      </h1>
       <Swiper
       //@ts-ignore
         onSwiper={setSwiperRef}
-        slidesPerView={3}
+        slidesPerView={4}
         centeredSlides={true}
         spaceBetween={30}
         pagination={{
@@ -54,31 +53,16 @@ export default function ProductContainer() {
         }}
         navigation={true}
         virtual
+       
       >
-        {slides.map((slideContent, index) => (
-          <SwiperSlide className='h-[400px]' style={{}}  key={slideContent} virtualIndex={index}>
-            {slideContent}
+        {products.map((product:Product, index) => (
+          <SwiperSlide style={{width:'300px' ,backgroundColor:'blue',height:'200px'}}  key={index} virtualIndex={index}>
+            <ProductCard name={product.name} rating={product.rating} amount={product.amount} category={product.category} id={product.id} img={product.img} />
           </SwiperSlide>
         ))}
       </Swiper>
 
-      <p className="append-buttons">
-        <button onClick={() => prepend()} className="prepend-2-slides">
-          Prepend 2 Slides
-        </button>
-        <button onClick={() => slideTo(1)} className="prepend-slide">
-          Slide 1
-        </button>
-        <button onClick={() => slideTo(250)} className="slide-250">
-          Slide 250
-        </button>
-        <button onClick={() => slideTo(500)} className="slide-500">
-          Slide 500
-        </button>
-        <button onClick={() => append()} className="append-slides">
-          Append Slide
-        </button>
-      </p>
-    </>
+     
+    </div>
   );
 }

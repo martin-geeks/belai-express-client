@@ -15,7 +15,7 @@ const BottomNavBar: NextPage = () => {
     }
     
     return (
-        <div className="w-full">
+        <div className="w-full z-[20]">
             
             <Button className="rounded-none hidden " onClick={handler}><CiMenuBurger className="text-white "/></Button>
             <Navbar

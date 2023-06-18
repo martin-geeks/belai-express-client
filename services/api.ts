@@ -38,6 +38,7 @@ export const getProducts = async () => {
 }
 
 export const getClothes = async () => {
+    try {
     let resp = await axios.get(REMOTE_url,{
         params:{
             client_id:'sQ1dTSupVAeRKiLEWzmzjWgKOuU5q3rFt086AsT47-g',
@@ -50,6 +51,9 @@ export const getClothes = async () => {
     } else {
         //console.log(resp)
     }
+} catch(error: any) {
+    return {status:false}
+}
 }
 
 
