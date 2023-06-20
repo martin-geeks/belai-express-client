@@ -1,8 +1,6 @@
 import Header from '@/components/Header';
 import BottomNavBar from '@/components/BottomNavBar';
-import FooterSitemapLinks from '@/components/Footer';
-import './globals.css'
-import { Head } from 'next/document';
+import './globals.css';
 
 
 export const metadata = {
