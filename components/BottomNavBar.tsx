@@ -2,11 +2,9 @@
 import { NextPage } from "next";
 import { Alert,Navbar,Button,Dropdown} from 'flowbite-react'
 import {getProducts } from '../services/api';
-import {RiHomeLine} from 'react-icons/ri';
 import {CiMenuBurger} from 'react-icons/ci';
-import {AiOutlineUser,AiOutlineLogin,AiOutlineUserAdd,AiOutlineHeart} from 'react-icons/ai';
-import {HiOutlineHome} from 'react-icons/hi';
 import {BsBag,BsHeart,BsBell} from 'react-icons/bs';
+import {GrHomeRounded} from 'react-icons/gr';
 const BottomNavBar: NextPage = () => {
      
     const handler = async () => {
@@ -27,11 +25,11 @@ const BottomNavBar: NextPage = () => {
                 
                 
                 <div className="w-[100vw] md:hidden lg:hidden">
-                    <ul className="flex justify-between  lg:w-[500px] ">
-                        <li><Button  color={'gray'}  className="rounded-none border-none" onClick={handler}><HiOutlineHome className="text-[20pt]"/></Button></li>
-                        <li><Button  color={'gray'}  className="rounded-none border-none" onClick={handler}><BsBag className="text-[20pt]"/></Button></li>
-                        <li><Button  color={'gray'}  className="rounded-none border-none" onClick={handler}><BsHeart className="text-[20pt]"/></Button></li>
-                        <li><Button  color={'gray'}  className="rounded-none border-none" onClick={handler}><BsBell className="text-[20pt]"/></Button></li>
+                    <ul className="flex justify-around  lg:w-[500px] ">
+                        <li><Button  color={'gray'}  className="rounded-none border-none" onClick={handler}><GrHomeRounded className="text-[15pt] font-medium"/></Button></li>
+                        <li><Button  color={'gray'}  className="rounded-none border-none" onClick={handler}><BsBag className="text-[15pt]"/></Button></li>
+                        <li><Button  color={'gray'}  className="rounded-none border-none" onClick={handler}><BsHeart className="text-[15pt]"/></Button></li>
+                        <li><Button  color={'gray'}  className="rounded-none border-none" onClick={handler}><BsBell className="text-[15pt]"/></Button></li>
                         
                     </ul>
                     

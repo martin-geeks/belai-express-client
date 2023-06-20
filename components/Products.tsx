@@ -1,6 +1,6 @@
 'use client'
-import React, { useRef, useState } from 'react';
-import SwiperCore, { Virtual, Navigation, Pagination } from 'swiper';
+import React, { useRef, useState ,useEffect,useLayoutEffect} from 'react';
+import SwiperCore, { Virtual, Navigation, Pagination,Autoplay,Keyboard,EffectFade} from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import img from '../public/canvas.jpg';
 import iphone from '../public/apple-iphone-14-pro-max.jpg';
@@ -11,6 +11,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import ProductCard from './ProductCard';
 import { Product } from '@/utils/types';
+import { useSelectedLayoutSegment } from 'next/navigation';
 
 
 const products: Product[] = [
@@ -22,20 +23,13 @@ const products: Product[] = [
   {name:'Karen Williams Holmes',amount:390,category:'Foods,Canes',id:'',rating:1.9,img:dress.src}
 ]
 // install Virtual module
-SwiperCore.use([Virtual, Navigation, Pagination]);
+SwiperCore.use([Virtual, Navigation, Pagination,Keyboard]);
 
 export default function ProductContainer() {
   const [swiperRef, setSwiperRef] = useState(null);
-  const appendNumber = useRef(500);
-  const prependNumber = useRef(1);
-  // Create array with 500 slides
-
+  const [numberSlides,setNumberSlides] = useState<number>(1);
   
-
-  const slideTo = (index:number) => {
-    //@ts-ignore
-    swiperRef.slideTo(index - 1, 0);
-  };
+  
 
   return (
     <div className='my-[5%] border py-5'>
@@ -45,18 +39,34 @@ export default function ProductContainer() {
       <Swiper
       //@ts-ignore
         onSwiper={setSwiperRef}
-        slidesPerView={4}
-        centeredSlides={true}
+        breakpoints={{
+          // when window width is >= 640px
+          640: {
+            width: 640,
+            slidesPerView: 3,
+          },
+          // when window width is >= 768px
+          768: {
+            width: 768,
+            slidesPerView: 2,
+          },
+
+        }}
+        centeredSlides={false}
         spaceBetween={30}
         pagination={{
-          type: 'fraction',
+          type: 'progressbar',
         }}
-        navigation={true}
-        virtual
+        keyboard
+        navigation={false}
        
+        autoplay
+        style={{zIndex:'0'}}
+
+        modules={[EffectFade]}
       >
         {products.map((product:Product, index) => (
-          <SwiperSlide style={{width:'300px' ,backgroundColor:'blue',height:'200px'}}  key={index} virtualIndex={index}>
+          <SwiperSlide style={{}}  key={index} >
             <ProductCard name={product.name} rating={product.rating} amount={product.amount} category={product.category} id={product.id} img={product.img} />
           </SwiperSlide>
         ))}
