@@ -31,7 +31,7 @@ const Slider: NextPage = () => {
         className="rounded-none"
         >
             {categories.map((category:any,index:number)=>(
-                <Banner title={category.title} img={category.img}/>
+                <Banner key={index} title={category.title} img={category.img}/>
             ))}
         </Carousel>
     )
