@@ -1,6 +1,5 @@
 import Header from '@/components/Header';
 import BottomNavBar from '@/components/BottomNavBar';
-import FooterSitemapLinks from '@/components/Footer';
 import './globals.css'
 
 
