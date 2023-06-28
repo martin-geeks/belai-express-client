@@ -65,9 +65,9 @@ const Cart:NextPage = () => {
                 </div>
             </div>
             <div className="my-3 lg:grid lg:grid-cols-4 gap-y-2">
-                {[1,3,7,8,9,4,6,7].map((index:any)=>{
-                    return <CartItem name="sample name" amount={300} img={dress.src} rating={3} category="" id={index} />
-                })}
+                {[1,3,7,8,9,4,6,7].map((index:any)=>(
+                    <CartItem key={index} name="sample name" amount={300} img={dress.src} rating={3} category="" id={index} />
+                ))}
                 
                    
             </div>
