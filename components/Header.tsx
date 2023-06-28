@@ -1,7 +1,7 @@
 'use client';
 import {useRef} from 'react';
 import { NextPage } from "next";
-import { Alert,Navbar,Button,Dropdown,TextInput,Label,} from 'flowbite-react'
+import { Alert,Navbar,Dropdown,TextInput,Label} from 'flowbite-react'
 import {getProducts } from '../services/api';
 import {RiHomeLine} from 'react-icons/ri';
 import {CiMenuBurger} from 'react-icons/ci';
@@ -9,6 +9,9 @@ import {AiOutlineLogin,AiOutlineUserAdd,AiOutlineSearch,AiOutlineArrowDown, AiOu
 import {GrHomeRounded} from 'react-icons/gr';
 import {BsBag,BsHeart,BsBell,BsArrowRight} from 'react-icons/bs';
 import Link from "next/link";
+import { Collapse } from 'flowbite';
+import { Button } from '@material-tailwind/react';
+import { BellAlertIcon, BellIcon, EyeIcon, HeartIcon, HomeIcon, PlusIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
 
 
 
@@ -66,7 +69,7 @@ const Header: NextPage = () => {
     }
     
     return (
-        <div  className="w-full ">
+        <div  className="w-full lg:fixed lg:top-0 z-10" >
             <div ref={bottomMenu} className="fixed bottom-0 w-[100%] h-[400px] bg-white z-10 bg-gray-100 rounded-t-[30px] mb-[-150%] transition-all shadow-sm lg:hidden">
                 <div className='flex justify-end'><h1 className="font-medium text-center p-3.5 text-xl">Enter product name or id</h1> <Button onClick={toggleSearch} className='bg-red-700 hover:bg-red-800 rounded-none rounded-tr-[30px]'><AiOutlineArrowDown/></Button></div>
                 <SearchForm />
@@ -74,12 +77,9 @@ const Header: NextPage = () => {
                    Nothing to show
                 </div>
             </div>
-            <div ref={appDrawer} className="fixed bottom-0  w-[80%] h-[100vh]  bg-white z-10 bg-gray-100 rounded-none ml-[-100%] transition-all shadow-lg border-r lg:hidden">
-                <div className='flex justify-end'><h1 className="font-medium text-center p-3.5 text-xl">Side Bar</h1> <Button onClick={toggleAppDrawer} className='bg-red-700 hover:bg-red-800 rounded-none '><AiOutlineArrowLeft/></Button></div>
-                <Drawer />
-                <div className="text-center my-[25%]">
-                   App Drawer content
-                </div>
+            <div ref={appDrawer} className="fixed bottom-0 bg-gray-100 w-[80%] h-[100vh]  bg-white z-10 bg-gray-100 rounded-none ml-[-100%] transition-all shadow-lg border-r lg:hidden">
+                <div className='flex justify-end'><h1 className="font-medium text-center p-3.5 text-xl"></h1> <Button onClick={toggleAppDrawer} className='bg-white hover:bg-gray-200 rounded-none '><AiOutlineArrowLeft className='text-black'/></Button></div>
+               
             </div>
             <Button className="rounded-none hidden " onClick={handler}><CiMenuBurger className="text-white "/></Button>
             <Navbar
@@ -111,10 +111,11 @@ const Header: NextPage = () => {
                 </form>
                 <div className="hidden md:block lg:block">
                     <ul className="flex justify-between  lg:w-[500px] ">
-                        <li><Button  color={'gray'}  className="rounded-none border-none focus:ring-1" onClick={handler}><GrHomeRounded className="text-[20pt]"/></Button></li>
-                        <li><Button  color={'gray'}  className="rounded-none border-none" onClick={handler}><BsBag className="text-[20pt]"/></Button></li>
-                        <li><Button  color={'gray'}  className="rounded-none border-none" onClick={handler}><BsHeart className="text-[20pt]"/></Button></li>
-                        <li><Button outline color={'gray'}  className="rounded-none border-none hover:border-none" onClick={handler}><BsBell className="text-[20pt]"/></Button></li>
+                        <li><Link href={'/'}><Button size='sm'  className="rounded-none bg-white shadow-none border-none focus:ring-1" onClick={handler}> <HomeIcon color='black'  className='h-[25px] w-[25px]'/> </Button></Link></li>
+                        <li><Link href={'/cart'}><Button size='sm'  className="rounded-none bg-white shadow-none border-none focus:ring-1" onClick={handler}> <HeartIcon color='black'  className='h-[25px] w-[25px]'/> </Button></Link></li>
+                        <li><Button size='sm'  className="rounded-none bg-white shadow-none border-none focus:ring-1" onClick={handler}> <ShoppingBagIcon color='black'  className='h-[25px] w-[25px]'/> </Button></li>
+                        <li><Button size='sm'  className="rounded-none bg-white shadow-none border-none focus:ring-1" onClick={handler}> <BellIcon color='black'  className='h-[25px] w-[25px]'/> </Button></li>
+
                         <Dropdown
                             label={<div>Account</div>}
                             color={'gray'}

@@ -6,7 +6,7 @@ import Category from '@/components/category';
 
 export default function Home() {
   return (
-    <main  className="bg-white min-screen h-screen no-scrollbar">
+    <main  className="my-10 bg-white min-screen h-screen no-scrollbar">
       <Slider />
       <Category/>
     <ProductContainer />

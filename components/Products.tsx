@@ -15,12 +15,12 @@ import { useSelectedLayoutSegment } from 'next/navigation';
 
 
 const products: Product[] = [
-  {name:'Canvas',amount:300,category:'Clothing,Magazine,Shopping',id:'',rating:4,img:img.src},
-  {name:'Apple iPhone 14 Pro Max',amount:2500,category:'Technology',id:'',rating:5,img:iphone.src},
-  {name:'Karen Williams Holmes',amount:390,category:'Foods,Canes',id:'',rating:1.9,img:dress.src},
-  {name:'Karen Williams Holmes',amount:390,category:'Foods,Canes',id:'',rating:1.9,img:dress.src},
-  {name:'Karen Williams Holmes',amount:390,category:'Foods,Canes',id:'',rating:1.9,img:dress.src},
-  {name:'Karen Williams Holmes',amount:390,category:'Foods,Canes',id:'',rating:1.9,img:dress.src}
+  {name:'Canvas',amount:300,category:'Clothing,Magazine,Shopping',id:'2',rating:4,img:img.src},
+  {name:'Apple iPhone 14 Pro Max',amount:2500,category:'Technology',id:'3',rating:5,img:iphone.src},
+  {name:'Karen Williams Holmes',amount:390,category:'Foods,Canes',id:'4',rating:1.9,img:dress.src},
+  {name:'Karen Williams Holmes',amount:390,category:'Foods,Canes',id:'5',rating:1.9,img:dress.src},
+  {name:'Karen Williams Holmes',amount:390,category:'Foods,Canes',id:'6',rating:1.9,img:dress.src},
+  {name:'Karen Williams Holmes',amount:390,category:'Foods,Canes',id:'7',rating:1.9,img:dress.src}
 ]
 // install Virtual module
 SwiperCore.use([Virtual, Navigation, Pagination,Keyboard]);
@@ -67,6 +67,7 @@ export default function ProductContainer() {
       >
         {products.map((product:Product, index) => (
           <SwiperSlide style={{}}  key={index} >
+            
             <ProductCard name={product.name} rating={product.rating} amount={product.amount} category={product.category} id={product.id} img={product.img} />
           </SwiperSlide>
         ))}

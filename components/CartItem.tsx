@@ -11,19 +11,19 @@ import {
   SpeedDial,
   SpeedDialAction,
   SpeedDialContent,
-  SpeedDialHandler
+  SpeedDialHandler,
+  Chip
 } from '@material-tailwind/react'
-import { BellAlertIcon, EyeIcon, HeartIcon, HomeIcon, PlusIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
+import { BellAlertIcon, EyeIcon, HeartIcon, HomeIcon, MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image'
 import dress from '@/public/karen-willis-holmes.jpg'
 import { Product } from "@/utils/types";
 import { NextPage } from 'next';
-import { add } from '@/redux/features/cart';
-import { useAppDispatch } from '@/redux/hooks';
 
 
-const ProductCard:NextPage<Product> = (product:Product)=> {
-    const dispatch = useAppDispatch()
+
+const CartItem:NextPage<Product> = (product:Product)=> {
+
     const labeProps = {
       variant: 'small',
       color:'blue-gray',
@@ -73,26 +73,34 @@ const ProductCard:NextPage<Product> = (product:Product)=> {
       </CardBody>
       <CardFooter className="pt-0">
         <div className='flex items-center gap-2 my-2'>
-            <Rating value={0} 
+            <Rating value={product.rating} 
                 className=''
             />
             <Typography>3.0 rated</Typography>
         </div>
-        <Button
-          ripple={true}
-          fullWidth={true}
-          size='sm'
-          variant='text'
-          color='red'
-          className="flex justify-center gap-2 bg-red-700  text-white shadow-none hover:shadow-none hover:scale-105 focus:shadow-none focus:scale-105 active:scale-100 hover:bg-red-500"
-          onClick={()=> dispatch(add(product.id))}
-        >
-          <ShoppingCartIcon className='h-5 w-5' />
-          <Typography className='normal-case text-sm h-5 '>Add to Cart</Typography>
-          
-        </Button>
+        <ButtonGroup className='mx-auto bg-white'>
+          <Button
+            ripple={false}
+            fullWidth={true}
+            size='sm'
+            className="bg-red-700 text-white shadow-none hover:shadow-none hover:scale-105 focus:shadow-none focus:scale-105 active:scale-100"
+          >
+            
+            <MinusIcon className='h-4 w-4' />
+          </Button>
+          <Chip  value={5} className='w-[100px] text-center bg-white text-black font-bold' />
+            <Button
+            ripple={false}
+            fullWidth={true}
+
+            className="bg-red-700 text-white shadow-none hover:shadow-none hover:scale-105 focus:shadow-none focus:scale-105 active:scale-100"
+          >
+            <PlusIcon className='h-4 w-4'/>
+          </Button>
+        </ButtonGroup>
+        
       </CardFooter>
     </Card>
     )
 } 
-export default  ProductCard;
+export default  CartItem;

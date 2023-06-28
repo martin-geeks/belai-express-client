@@ -1,3 +1,5 @@
+const { config } = require('process')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images:{
@@ -12,7 +14,8 @@ const nextConfig = {
               hostname: 'unsplash.com',
             }
           ]
-    }
+    },
+    
 }
 
 module.exports = nextConfig
