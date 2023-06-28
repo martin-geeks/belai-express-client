@@ -1,12 +1,9 @@
-'use client';
 import dynamic from 'next/dynamic';
 import Header from '@/components/Header';
 //import BottomNavBar from '@/components/BottomNavBar';
 import { Providers } from '@/redux/provider';
 const BottomNavBar = dynamic( ()=> import('@/components/BottomNavBar'),{ssr:false})
 import './globals.css';
-import { ThemeProvider } from '@material-tailwind/react';
-
 
 export const metadata = {
   title: 'Belai Express',
@@ -22,11 +19,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <ThemeProvider >
+          <div>
         <Header />
         {children}
         <BottomNavBar/>
-        </ThemeProvider>
+        </div>
         </Providers>
       
       </body>
