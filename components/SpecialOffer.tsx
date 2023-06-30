@@ -26,21 +26,7 @@ const SpecialOffer: NextPage = () => {
                 <Typography className='text-3xl'>Special Offers</Typography>
             </div>
             <div>
-                <Swiper
-                    slidesPerView={1}
-                >
-                    <SwiperSlide>
-                        1
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        2
-                    </SwiperSlide>
-                    
-                    <SwiperSlide>
-                        3
-                    </SwiperSlide>
-                    
-                </Swiper>
+               
             </div>
         </div>
     )
