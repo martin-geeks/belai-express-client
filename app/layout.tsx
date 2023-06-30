@@ -5,6 +5,8 @@ import { Providers } from '@/redux/provider';
 const BottomNavBar = dynamic( ()=> import('@/components/BottomNavBar'),{ssr:false})
 import './globals.css';
 
+//https://e-commerce-onlineshop.vercel.app/
+
 export const metadata = {
   title: 'Belai Express',
   description: 'An e-commerce web application',

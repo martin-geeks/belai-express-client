@@ -1,8 +1,3 @@
-'use client';
-
-import { AssertionError } from "assert";
-
-
 
 interface CARRTSTORAGE {
     items: string[]

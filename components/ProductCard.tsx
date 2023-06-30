@@ -33,8 +33,8 @@ const ProductCard:NextPage<Product> = (product:Product)=> {
     return (
 
            
-    <Card className="mx-auto border-2  w-[350px] lg:w-[300px] lg:mx-0">
-      <CardHeader shadow={false} floated={false} className="h-[150px] lg:h-[250px] ">
+    <Card className="mx-auto border-2 h-[400px]  w-[200px] lg:w-[300px] lg:mx-0">
+      <CardHeader shadow={false} floated={false} className=" lg:h-[250px] ">
         <SpeedDial placement='right' >
           <SpeedDialHandler className=' '>
             <IconButton className='absolute bg-gray-100 rounded-[50%] h-[50px] w-[50px] hover:bg-red-700'>
@@ -55,11 +55,11 @@ const ProductCard:NextPage<Product> = (product:Product)=> {
         </SpeedDial>
         <img 
           src={product.img}// "https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80" 
-          className="w-full h-[200px] object-cover"
+          className="w-full lg:h-[200px] object-cover"
         />
       </CardHeader>
       <CardBody>
-        <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center justify-between lg:mb-2">
           <Typography color="blue-gray" className="font-medium">
             {product.name}
           </Typography>
@@ -72,7 +72,7 @@ const ProductCard:NextPage<Product> = (product:Product)=> {
         </Typography>
       </CardBody>
       <CardFooter className="pt-0">
-        <div className='flex items-center gap-2 my-2'>
+        <div className='flex items-center lg:gap-2 lg:my-2'>
             <Rating value={0} 
                 className=''
             />

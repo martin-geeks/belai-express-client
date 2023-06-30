@@ -15,8 +15,8 @@ const BottomNavBar: NextPage = () => {
 
 
     const handler = async () => {
-        const products = await getProducts();
-        console.log(products);
+        //const products = await getProducts();
+        //console.log(products);
     }
     
     return (

@@ -32,28 +32,30 @@ export default function ProductContainer() {
   
 
   return (
-    <div className='my-[5%] border py-5'>
+    <div className='lg:my-[5%] lg:border lg:py-5'>
       <h1 className='text-2xl font-bold my-5 mx-2'>
-        Top stocks and Brands
+        Boutique
       </h1>
       <Swiper
       //@ts-ignore
         onSwiper={setSwiperRef}
+        slidesPerView={2}
+        spaceBetween={100}
         breakpoints={{
           // when window width is >= 640px
           640: {
             width: 640,
-            slidesPerView: 3,
+            slidesPerView: 2,
           },
           // when window width is >= 768px
           768: {
             width: 768,
             slidesPerView: 2,
+            spaceBetween:30
           },
 
         }}
         centeredSlides={false}
-        spaceBetween={30}
         pagination={{
           type: 'progressbar',
         }}

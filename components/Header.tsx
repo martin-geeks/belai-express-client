@@ -1,5 +1,5 @@
 'use client';
-import {useRef} from 'react';
+import {useRef,useState} from 'react';
 import { NextPage } from "next";
 import { Alert,Navbar,Dropdown,TextInput,Label} from 'flowbite-react'
 import {getProducts } from '../services/api';
@@ -10,7 +10,7 @@ import {GrHomeRounded} from 'react-icons/gr';
 import {BsBag,BsHeart,BsBell,BsArrowRight} from 'react-icons/bs';
 import Link from "next/link";
 import { Collapse } from 'flowbite';
-import { Button } from '@material-tailwind/react';
+import { Button, List, ListItem } from '@material-tailwind/react';
 import { BellAlertIcon, BellIcon, EyeIcon, HeartIcon, HomeIcon, PlusIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
 
 
@@ -27,7 +27,9 @@ const SearchForm:NextPage = () => {
                     <input type="text" className="bg-gray-50  border-b-2 border-gray-300 outline-none text-gray-900 text-sm hover:border-sky-blue-700 block w-full pl-10 p-3.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" required/>
                     </div>
                     <Button
-                        className="w-full rounded-none bg-sky-700 hover:bg-sky-800 focus:ring-0"
+                    fullWidth
+                    
+                        className="bg-red-600 rounded-none"
                     >
                         Search
                     </Button>
@@ -43,20 +45,20 @@ const Drawer:NextPage = () => {
     )
 }
 const Header: NextPage = () => {
-     const bottomMenu:any = useRef();
-     const appDrawer:any = useRef();
-
+    const bottomMenu:any = useRef();
+    const appDrawer:any = useRef();
+    const [searchState,setSearchState] = useState<boolean>(false)
      
     const handler = async () => {
         const products = await getProducts();
         console.log(products);
     }
     const toggleSearch = async () => {
-        if(bottomMenu.current?.classList.contains('mb-[-150%]')){
-            bottomMenu.current?.classList.remove('mb-[-150%]');
+        if(bottomMenu.current?.classList.contains('mb-[-250%]')){
+            bottomMenu.current?.classList.remove('mb-[-250%]');
             
         } else {
-            bottomMenu.current?.classList.add('mb-[-150%]')
+            bottomMenu.current?.classList.add('mb-[-250%]')
         }
     }
     const toggleAppDrawer = async () => {
@@ -70,11 +72,22 @@ const Header: NextPage = () => {
     
     return (
         <div  className="w-full lg:fixed lg:top-0 z-10" >
-            <div ref={bottomMenu} className="fixed bottom-0 w-[100%] h-[400px] bg-white z-10 bg-gray-100 rounded-t-[30px] mb-[-150%] transition-all shadow-sm lg:hidden">
-                <div className='flex justify-end'><h1 className="font-medium text-center p-3.5 text-xl">Enter product name or id</h1> <Button onClick={toggleSearch} className='bg-red-700 hover:bg-red-800 rounded-none rounded-tr-[30px]'><AiOutlineArrowDown/></Button></div>
+            <div ref={bottomMenu} className="fixed bottom-0 w-[100%] h-[100vh] bg-white z-10 bg-gray-100 rounded-t-[30px] mb-[-250%] transition-all transition-duration-[3] shadow-sm lg:hidden">
+
+                <div className='flex justify-center flex-col' draggable={true} onDragStart={()=>{console.log('Begin dragging')}} onDrag={()=>{console.log('dragged')}}>
+                    <Button onClick={toggleSearch} fullWidth={true} className=' hover:bg-red-100 rounded-none bg-white text-black'><AiOutlineArrowDown className='mx-auto text-2xl'/></Button>
+                    <h1 className="font-medium text-center p-3.5 text-xl">Type what you are looking for</h1>
+                </div>
                 <SearchForm />
                 <div className="text-center my-[25%]">
                    Nothing to show
+                   <List>
+                        {[1,2,3].map((index:number)=>(
+                            <ListItem key={index} className='bg-gray-200 animate rounded-none h-[100px]'>
+                                loader
+                            </ListItem>
+                        ))}
+                   </List>
                 </div>
             </div>
             <div ref={appDrawer} className="fixed bottom-0 bg-gray-100 w-[80%] h-[100vh]  bg-white z-10 bg-gray-100 rounded-none ml-[-100%] transition-all shadow-lg border-r lg:hidden">
@@ -93,8 +106,8 @@ const Header: NextPage = () => {
                 <h1 className="text-sky-700 text-xl font-bold md:hidden lg:hidden">Belai Express</h1>
                 </Navbar.Brand>
                 <div className="flex sm:hidden lg:hidden ">
-                <Button  color={'gray'}  className="rounded-none border-none" onClick={toggleSearch}><AiOutlineSearch className="text-xl"/></Button>
-                <Button  color={'gray'}  className="rounded-none border-none" onClick={toggleAppDrawer}><CiMenuBurger className="text-xl"/></Button>
+                <Button   color={'white'} className="rounded-none border-none shadow-none" onClick={toggleSearch}><AiOutlineSearch className="text-xl"/></Button>
+                <Button  color={'white'}  className="rounded-none border-none shadow-none" onClick={toggleAppDrawer}><CiMenuBurger className="text-xl"/></Button>
                 </div>
                 <form className="hidden items-center md:flex lg:flex">   
                 <label  className="sr-only">Search</label>
