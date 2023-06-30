@@ -46,7 +46,7 @@ const Category: NextPage = ()=> {
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:justify-around my-10  items-center">
             {categories.map((category:CategoryItem,index:number)=>(
                 <div key={index} className=" mx-2 h-[200px] rounded-xl border-2">
-                    <Typography className='absolute my-5 lg:text-2xl font-bold mx-5 hover:scale-5 bg-blue-300'>{category.title}</Typography>
+                    <Typography className='absolute my-5 lg:text-2xl font-bold mx-5 hover:scale-5'>{category.title}</Typography>
                         
                         <Image 
                             src={category.icon}
