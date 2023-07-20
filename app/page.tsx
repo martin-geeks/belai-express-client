@@ -2,7 +2,7 @@
 import ProductContainer from '@/components/Products';
 import FooterSitemapLinks from '@/components/Footer';
 import Slider from '@/components/Slider';
-import Category from '@/components/category';
+import Category from '@/components/Category';
 import SpecialOffer from '@/components/SpecialOffer';
 
 export default function Home() {

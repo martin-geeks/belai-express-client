@@ -1,4 +1,10 @@
 'use client';
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { List, ListItem} from '@mui/material';
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import {useRef,useState} from 'react';
 import { NextPage } from "next";
 import { Alert,Navbar,Dropdown,TextInput,Label} from 'flowbite-react'
@@ -10,9 +16,9 @@ import {GrHomeRounded} from 'react-icons/gr';
 import {BsBag,BsHeart,BsBell,BsArrowRight} from 'react-icons/bs';
 import Link from "next/link";
 import { Collapse } from 'flowbite';
-import { Button, List, ListItem } from '@material-tailwind/react';
+//import { Button, List, ListItem } from '@material-tailwind/react';
 import { BellAlertIcon, BellIcon, EyeIcon, HeartIcon, HomeIcon, PlusIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
-
+import { Button as BTN } from '@mui/material';
 
 
 const SearchForm:NextPage = () => {
@@ -106,8 +112,8 @@ const Header: NextPage = () => {
                 <h1 className="text-sky-700 text-xl font-bold md:hidden lg:hidden">Belai Express</h1>
                 </Navbar.Brand>
                 <div className="flex sm:hidden lg:hidden ">
-                <Button   color={'white'} className="rounded-none border-none shadow-none" onClick={toggleSearch}><AiOutlineSearch className="text-xl"/></Button>
-                <Button  color={'white'}  className="rounded-none border-none shadow-none" onClick={toggleAppDrawer}><CiMenuBurger className="text-xl"/></Button>
+                <Button  className="rounded-none border-none shadow-none" onClick={toggleSearch}><AiOutlineSearch className="text-xl"/></Button>
+                <Button    className="rounded-none border-none shadow-none" onClick={toggleAppDrawer}><CiMenuBurger className="text-xl"/></Button>
                 </div>
                 <form className="hidden items-center md:flex lg:flex">   
                 <label  className="sr-only">Search</label>
@@ -124,35 +130,25 @@ const Header: NextPage = () => {
                 </form>
                 <div className="hidden md:block lg:block">
                     <ul className="flex justify-between  lg:w-[500px] ">
-                        <li><Link href={'/'}><Button size='sm'  className="rounded-none bg-white shadow-none border-none focus:ring-1" onClick={handler}> <HomeIcon color='black'  className='h-[25px] w-[25px]'/> </Button></Link></li>
-                        <li><Link href={'/cart'}><Button size='sm'  className="rounded-none bg-white shadow-none border-none focus:ring-1" onClick={handler}> <HeartIcon color='black'  className='h-[25px] w-[25px]'/> </Button></Link></li>
-                        <li><Button size='sm'  className="rounded-none bg-white shadow-none border-none focus:ring-1" onClick={handler}> <ShoppingBagIcon color='black'  className='h-[25px] w-[25px]'/> </Button></li>
-                        <li><Button size='sm'  className="rounded-none bg-white shadow-none border-none focus:ring-1" onClick={handler}> <BellIcon color='black'  className='h-[25px] w-[25px]'/> </Button></li>
+                        <li><Link href={'/'}><Button  className="rounded-none bg-white shadow-none border-none focus:ring-1" onClick={handler}> <HomeIcon color='black'  className='h-[25px] w-[25px]'/> </Button></Link></li>
+                        <li><Link href={'/cart'}><Button   className="rounded-none bg-white shadow-none border-none focus:ring-1" onClick={handler}> <HeartIcon color='black'  className='h-[25px] w-[25px]'/> </Button></Link></li>
+                        <li><Button  className="rounded-none bg-white shadow-none border-none focus:ring-1" onClick={handler}> <ShoppingBagIcon color='black'  className='h-[25px] w-[25px]'/> </Button></li>
+                        <li><Button   className="rounded-none bg-white shadow-none border-none focus:ring-1" onClick={handler}> <BellIcon color='black'  className='h-[25px] w-[25px]'/> </Button></li>
 
-                        <Dropdown
-                            label={<div>Account</div>}
-                            color={'gray'}
-                            className="rounded-none"
-                            
-                            
-                        >
-                            <Dropdown.Header>
-                                <h1 className="text-sm">Join or Sign In</h1>
-                            </Dropdown.Header>
-                            <Dropdown.Item >
-                                   <Link href={{pathname:'/authentication',query:'signin=true'}} prefetch={true} className="flex"><AiOutlineLogin className=" mr-3 text-xl"/><span>Sign In</span></Link>
-                                
-                            </Dropdown.Item>
-                            <Dropdown.Item>
-                                 
-                            <Link href={{pathname:'/authentication',query:'signup=true'}} prefetch={true} className="flex"><AiOutlineUserAdd className=" mr-3 text-xl "/>
-                                 <span>Join Us</span>
-                                 </Link>
-                            </Dropdown.Item>
-                            <Dropdown.Item>
-                                Help
-                            </Dropdown.Item>
-                        </Dropdown>
+                        <PopupState variant="popover" popupId="demo-popup-menu">
+      {(popupState) => (
+        <React.Fragment>
+          <Button color={'inherit'} variant="contained" {...bindTrigger(popupState)} size={'small' }>
+            My Account
+          </Button>
+          <Menu {...bindMenu(popupState)}>
+            <MenuItem onClick={popupState.close}>Profile</MenuItem>
+            <MenuItem onClick={popupState.close}>My account</MenuItem>
+            <MenuItem onClick={popupState.close}>Logout</MenuItem>
+          </Menu>
+        </React.Fragment>
+      )}
+    </PopupState>
                     </ul>
                     
                 </div>

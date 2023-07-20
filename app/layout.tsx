@@ -4,6 +4,8 @@ import Header from '@/components/Header';
 import { Providers } from '@/redux/provider';
 const BottomNavBar = dynamic( ()=> import('@/components/BottomNavBar'),{ssr:false})
 import './globals.css';
+import ThemeRegistry from '@/components/themeRegistry';
+
 
 //https://e-commerce-onlineshop.vercel.app/
 
@@ -22,9 +24,11 @@ export default function RootLayout({
       <body>
         <Providers>
           <div>
+          <ThemeRegistry options={{ key : 'mui' }}>
         <Header />
         {children}
         <BottomNavBar/>
+        </ThemeRegistry>
         </div>
         </Providers>
       

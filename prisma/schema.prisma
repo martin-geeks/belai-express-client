@@ -1,0 +1,191 @@
+// This is your Prisma schema file,
+// learn more about it in the docs https//pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Customer {
+  id        String             @id @default(auto()) @map("_id") @db.ObjectId
+  photo     String?
+  email     String             @unique
+  name      String
+  phone     String             @unique
+  address   Address?           @relation(fields: [addressId], references: [id])
+  cart      Cart[]
+  reviews   Review[]
+  sessions  CustomerSessions[]
+  password  String
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  addressId String?            @db.ObjectId
+}
+
+model Review {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  body       String
+  photos     String[]
+  videos     String[]
+  product_id Product  @relation(fields: [productId], references: [id])
+  author     Customer @relation(fields: [authorId], references: [id])
+  authorId   String   @db.ObjectId
+  updatedAt  DateTime @updatedAt
+  productId  String   @db.ObjectId
+}
+
+model Category {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  category_name String    @unique
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  Product       Product[]
+}
+
+model Product {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name           String
+  amount         String
+  rating         Float
+  category       Category  @relation(fields: [categoryId], references: [id])
+  photos         String[]
+  model          String
+  brand          String
+  manufacturer   String
+  tags           String[]
+  availability   Boolean
+  delivery       Boolean
+  locations      String[]
+  product_id     String
+  variants       String[]
+  description    String
+  shipping       Shipping? @relation(fields: [shippingId], references: [id])
+  review         Review[]
+  specifications Json?
+  cart           Cart[]
+  about          String
+  discount       String
+  release        DateTime
+  expire         DateTime
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  categoryId     String    @db.ObjectId
+  shippingId     String?   @db.ObjectId
+}
+
+model Shipping {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  cost      Int
+  location  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Product   Product[]
+}
+
+model Wishlist {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  productId String   @db.ObjectId
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+}
+
+model Cart {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId String   @db.ObjectId
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  String   @db.ObjectId
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt()
+}
+
+model Card {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  cardNumber String
+  expiry     DateTime
+  name       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt()
+}
+
+model Address {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  city      String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt()
+  Customer  Customer[]
+}
+
+model Notification {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  body      String
+  pictures  String[]
+  urls      String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+}
+
+model Admins {
+  id         String          @id @default(auto()) @map("_id") @db.ObjectId
+  photo      String?
+  email      String          @unique
+  name       String
+  phone      String          @unique
+  address    String[]
+  moderators Moderators[]
+  sessions   AdminSessions[]
+  password   String
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+  addressId  String?         @db.ObjectId
+}
+
+model Moderators {
+  id          String              @id @default(auto()) @map("_id") @db.ObjectId
+  photo       String?
+  email       String              @unique
+  name        String
+  phone       String              @unique
+  assignedBy  Admins?             @relation(fields: [adminId], references: [id])
+  adminId     String              @db.ObjectId
+  sessions    ModeratorSessions[]
+  permissions String[]
+  password    String
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+}
+
+model CustomerSessions {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  action        String
+  customer      Customer @relation(fields: [customerId], references: [id])
+  customerId    String   @db.ObjectId
+  clientDetails Json
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt()
+}
+
+model AdminSessions {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  action    String
+  adimn     Admins   @relation(fields: [adminId], references: [id])
+  adminId   String   @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+}
+
+model ModeratorSessions {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  action      String
+  moderator   Moderators @relation(fields: [moderatorId], references: [id])
+  moderatorId String     @db.ObjectId
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt()
+}

@@ -7,6 +7,20 @@ import ct1 from '@/public/samsungdex_kv_mo.webp';
 import ct2 from '@/public/clothing-header-2000.jpg';
 import ct3 from '@/public/makeup-kit.webp';
 import ct4 from '@/public/sports.jpg'
+import * as React from 'react';
+import { experimentalStyled as styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Unstable_Grid2';
+
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
+
 
 interface CategoryItem {
     title: string;
@@ -43,23 +57,18 @@ const Category: NextPage = ()=> {
     return (
         <div data-aos='slide-up'>
             <h1 className="text-3xl text-center my-3 ">Category of Goods</h1>
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:justify-around my-10  items-center">
-            {categories.map((category:CategoryItem,index:number)=>(
-                <div key={index} className=" mx-2 h-[200px] rounded-xl border-2">
-                    <Typography className='absolute my-5 lg:text-2xl font-bold mx-5 hover:scale-5'>{category.title}</Typography>
-                        
-                        <Image 
-                            src={category.icon}
-                            width={100}
-                            height={100}
-                            alt="Category Item"
-                            className="w-full"
-                            quality={100}
-                        />
-                    
-                </div>
-            ))}
-        </div>
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+  {categories.map((category, index) => (
+    <Grid xs={2} sm={4} md={3} key={index}>
+      <Item 
+      className="h-[200px] shadow-sm border-2 m-2 bg-slate-700 "
+      >
+        {category.title}
+        
+        </Item>
+    </Grid>
+  ))}
+</Grid>
         </div>
     )
 }
