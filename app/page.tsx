@@ -5,6 +5,7 @@ import Slider from '@/components/Slider';
 import Category from '@/components/Category';
 import SpecialOffer from '@/components/SpecialOffer';
 
+
 export default function Home() {
   return (
     <main  className="lg:my-10 bg-white min-screen h-screen no-scrollbar">
@@ -12,7 +13,7 @@ export default function Home() {
       <Slider />
       <SpecialOffer/>
       <Category/>
-    <ProductContainer />
+      <ProductContainer />
       <FooterSitemapLinks/>
     </main>
   )
